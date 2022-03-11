@@ -1,26 +1,24 @@
-import React, { Component } from "react";
+import React, { } from "react";
 import "./App.scss";
 import HomePage from "./components/HomePage";
 import CreatePage from "./components/CreatePage";
 import UpdatePage from "./components/UpdatePage";
-import { BrowserRouter as Router, Routes, Route}
-    from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
-class App extends Component {
+const App = () => {
 
-  render() {
-    return (
-      /*Set up routes for multiple pages*/
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/HomePage" element={<HomePage />} />
-          <Route path="/CreatePage" element={<CreatePage />} />
-          <Route path="/UpdatePage" element={<UpdatePage />} />
-        </Routes>
-      </Router>
-    );
-  }
+
+  return (
+    /*Set up routes for multiple pages*/
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/HomePage" element={<HomePage />} />
+        <Route path="/CreatePage" element={<CreatePage />} />
+        <Route path="/UpdatePage" element={<UpdatePage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
