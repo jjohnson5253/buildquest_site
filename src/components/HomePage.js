@@ -91,8 +91,8 @@ const HomePage = () => {
         )}  
 
         {/* Buttons to go to other pages */}
-        <button onClick={GoToCreatePage} className = "myButton">Create Page</button>
-        <button onClick={GoToUpdatePage} className = "myButton">Update Page</button>
+        <button onClick={GoToCreatePage} className = "myButton">Create new game</button>
+        <button onClick={GoToUpdatePage} className = "myButton">Submit proposal</button>
       </div>
   );
 }
