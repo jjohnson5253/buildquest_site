@@ -30,10 +30,24 @@ const UpdatePage = () => {
   // function to read tables minted on connected account
   const ReadTables = async () => {
     const tbl = await connect({ network: "testnet", signer });
-    const tables = await tbl.list();
 
+    // print out all tables associated with wallet
+    /*const tables = await tbl.list();
     console.log("Tables:")
-    console.log(tables)
+    console.log(tables)*/
+
+    // print out specific table
+    const { data: { rows, columns }} = await tbl.query(`SELECT * FROM game_records_365;`);
+    //const myQuery = await tbl.query(`SELECT * FROM game_records_365;`);
+    console.log("TABLE game_records_365:")
+    
+    for (const [rowId, row] of Object.entries(rows)) {
+      console.log(`row: ${rowId}`);
+      for (const [colId, data] of Object.entries(row)) {
+        const { name } = columns[colId];
+        console.log(`  ${name}: ${data}`);
+      }
+    }
   }
 
   return (
