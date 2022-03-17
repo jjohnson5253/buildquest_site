@@ -3,7 +3,7 @@
 //
 
 import { NavLink, useLocation } from "react-router-dom";
-import React, { } from "react";
+import React, { useState } from "react";
 import { connect } from "@textile/tableland";
 import { ethers } from "ethers";
 import MaterialTable from 'material-table'
@@ -13,6 +13,15 @@ import MaterialTable from 'material-table'
 
 const UpdatePage = () => {
 
+  const [tableData,setTableData]=useState([
+    {name:"Nick",email:"nick@gmail.com"},
+    {name:"Bob",email:"bob@gmail.com"},
+    {name:"Tony",email:"tony@gmail.com"},
+  ])
+  const columns=[
+    {title:"Name",field:"name"},
+    {title:"Email",field:"email"},
+  ]
   // get location which allows us to access data passed through router.
   // We can pass info like currentConnected wallet
   let location = useLocation();
@@ -49,6 +58,13 @@ const UpdatePage = () => {
         console.log(`  ${name}: ${data}`);
       }
     }
+
+    setTableData([
+      {name:"Ally",email:"ally@gmail.com"},
+      {name:"Bertha",email:"bertha@gmail.com"},
+      {name:"Rachel",email:"rachel@gmail.com"},
+    ])
+
   }
 
   return (
@@ -56,7 +72,9 @@ const UpdatePage = () => {
       <h1>Update Page</h1>
 
       <MaterialTable
-
+        columns={columns}
+        data={tableData}
+        title={"demo title"}
       />
 
       <p>Connected Account: {location.state.currentAccount}</p>
