@@ -6,6 +6,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import React, { } from "react";
 import { connect } from "@textile/tableland";
 import { ethers } from "ethers";
+import MaterialTable from 'material-table'
 
 // TODO: uncomment when we stop using metamask for connecting to tables
 //import { Wallet, providers } from "ethers";
@@ -53,6 +54,10 @@ const UpdatePage = () => {
   return (
     <div>
       <h1>Update Page</h1>
+
+      <MaterialTable
+
+      />
 
       <p>Connected Account: {location.state.currentAccount}</p>
 
