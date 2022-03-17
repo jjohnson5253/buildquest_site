@@ -6,11 +6,52 @@ import { NavLink, useLocation } from "react-router-dom";
 import React, { } from "react";
 import { connect } from "@textile/tableland";
 import { ethers } from "ethers";
+import ReactTable from 'react-table-6';
+import "react-table-6/react-table.css";
 
 // TODO: uncomment when we stop using metamask for connecting to tables
 //import { Wallet, providers } from "ethers";
 
+//////////////////////////////////////////////////////
+
+//const ReactTable = window.ReactTable.default
+
+const response = {
+  initial_data: [
+   {
+     "Did I see this plant in 2016?":"No",
+     "Did I see this plant in 2017?":"Yes",
+     "How Many?":1,
+     "User Data 4":"x",
+     "User Data 5":"",
+     "Did I see this plant in 2022?":"No",
+     "Name":"Abronia alpina"
+   },
+   {
+     "Did I see this plant in 2016?":"No",
+     "Did I see this plant in 2017?":"No",
+     "How Many?":11,
+     "User Data 4":"x",
+     "User Data 5":"",
+     "Did I see this plant in 2022?":"Yes",
+     "Name":"Abronia alpina1"
+   }]
+}
+//////////////////////////////////////////////////////
+
+
 const UpdatePage = () => {
+
+  //////////////////////////////////////////////////////
+  let testData = response.initial_data
+
+  let columns = Object.keys(response.initial_data[0]).map((key, id)=>{
+    return {
+      Header: key,
+      accessor: key
+    }
+  })
+  //////////////////////////////////////////////////////
 
   // get location which allows us to access data passed through router.
   // We can pass info like currentConnected wallet
@@ -48,11 +89,17 @@ const UpdatePage = () => {
         console.log(`  ${name}: ${data}`);
       }
     }
+
   }
 
   return (
     <div>
       <h1>Update Page</h1>
+
+      <ReactTable
+        data = { testData }
+        columns = { columns }
+      />
 
       <p>Connected Account: {location.state.currentAccount}</p>
 
