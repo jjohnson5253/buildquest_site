@@ -15,12 +15,7 @@ const UpdatePage = () => {
   const maxSelections = 1;
   const [checked, setChecked] = useState();
 
-  const [tableData,setTableData]=useState([
-    // dummy data to start
-    {name:"name1",_id:"id1",owneraddress:"owner1"},
-    {name:"name2",_id:"id2",owneraddress:"owner2"},
-    {name:"name3",_id:"id3",owneraddress:"owner3"},
-  ])
+  const [tableData,setTableData]=useState();
   const columns=[
     {title:"Name",field:"name"},
     {title:"Id",field:"_id"},
@@ -113,6 +108,7 @@ const UpdatePage = () => {
   return (
     <div>
       <h1>Update Page</h1>
+      <p>Connected Account: {location.state.currentAccount}</p>
 
       <MaterialTable
         columns={columns}
@@ -129,9 +125,7 @@ const UpdatePage = () => {
         }}
       />
 
-      <p>Connected Account: {location.state.currentAccount}</p>
-
-      <button onClick={ReadTables}>Read Tables</button>
+      <button onClick={ReadTables}>Read from Tableland</button>
       <button onClick={MintStuff}>Mint</button>
 
       <NavLink to="/HomePage"><button className = "myButton">Home Page</button></NavLink>
