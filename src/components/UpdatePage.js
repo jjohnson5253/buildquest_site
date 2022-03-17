@@ -14,13 +14,14 @@ import MaterialTable from 'material-table'
 const UpdatePage = () => {
 
   const [tableData,setTableData]=useState([
-    {name:"Nick",email:"nick@gmail.com"},
-    {name:"Bob",email:"bob@gmail.com"},
-    {name:"Tony",email:"tony@gmail.com"},
+    {name:"name1",_id:"id1",owneraddress:"owner1"},
+    {name:"name2",_id:"id2",owneraddress:"owner2"},
+    {name:"name3",_id:"id3",owneraddress:"owner3"},
   ])
   const columns=[
     {title:"Name",field:"name"},
-    {title:"Email",field:"email"},
+    {title:"Id",field:"_id"},
+    {title:"Owner",field:"owneraddress"},
   ]
   // get location which allows us to access data passed through router.
   // We can pass info like currentConnected wallet
@@ -50,7 +51,7 @@ const UpdatePage = () => {
     const { data: { rows, columns }} = await tbl.query(`SELECT * FROM game_records_365;`);
     //const myQuery = await tbl.query(`SELECT * FROM game_records_365;`);
     console.log("TABLE game_records_365:")
-    
+
     for (const [rowId, row] of Object.entries(rows)) {
       console.log(`row: ${rowId}`);
       for (const [colId, data] of Object.entries(row)) {
@@ -59,11 +60,31 @@ const UpdatePage = () => {
       }
     }
 
-    setTableData([
-      {name:"Ally",email:"ally@gmail.com"},
-      {name:"Bertha",email:"bertha@gmail.com"},
-      {name:"Rachel",email:"rachel@gmail.com"},
-    ])
+    /*console.log("Here")
+    console.log("rows")
+    console.log(rows)
+    console.log("columns")
+    console.log(columns)*/
+
+    let newTableData = []
+
+    for (const [rowId, row] of Object.entries(rows)) {
+      console.log(`row: ${rowId}`);
+      let myRow = {}
+      for (const [colId, data] of Object.entries(row)) {
+        const { name } = columns[colId];
+        myRow[name] = data
+        console.log(`  ${name}: ${data}`);
+      }
+      console.log('myRow')
+      console.log(myRow)
+      newTableData.push(myRow)
+    }
+
+    console.log("newTableData")
+    console.log(newTableData)
+
+    setTableData(newTableData)
 
   }
 
@@ -80,7 +101,6 @@ const UpdatePage = () => {
           selection: true,
           showTitle: false,
           toolbar: false,
-      
           paging: false,
         }}
       />
