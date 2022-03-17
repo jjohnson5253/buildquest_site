@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 const App = () => {
 
-
   return (
     /*Set up routes for multiple pages*/
     <Router>
