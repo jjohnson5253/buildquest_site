@@ -12,8 +12,11 @@ import MaterialTable from 'material-table'
 //import { Wallet, providers } from "ethers";
 
 const UpdatePage = () => {
+  const maxSelections = 1;
+  const [checked, setChecked] = useState();
 
   const [tableData,setTableData]=useState([
+    // dummy data to start
     {name:"name1",_id:"id1",owneraddress:"owner1"},
     {name:"name2",_id:"id2",owneraddress:"owner2"},
     {name:"name3",_id:"id3",owneraddress:"owner3"},
@@ -88,6 +91,25 @@ const UpdatePage = () => {
 
   }
 
+  const handleSelectionProps = rowData => {
+    return {
+      disabled:
+        checked && checked.length >= maxSelections && !rowData.tableData.checked
+          ? true
+          : false
+    };
+  };
+
+  const selectRow = rows =>
+  {
+    setChecked(rows);
+  }
+
+  const MintStuff = () => {
+    console.log("minting this row")
+    console.log(checked)
+  }
+
   return (
     <div>
       <h1>Update Page</h1>
@@ -95,19 +117,22 @@ const UpdatePage = () => {
       <MaterialTable
         columns={columns}
         data={tableData}
-        title={"demo title"}
+        onSelectionChange={rows => selectRow(rows)}
         options={{
           search: false,
           selection: true,
           showTitle: false,
           toolbar: false,
           paging: false,
+          selectionProps: handleSelectionProps,
+          showSelectAllCheckbox: false,
         }}
       />
 
       <p>Connected Account: {location.state.currentAccount}</p>
 
       <button onClick={ReadTables}>Read Tables</button>
+      <button onClick={MintStuff}>Mint</button>
 
       <NavLink to="/HomePage"><button className = "myButton">Home Page</button></NavLink>
     </div>
