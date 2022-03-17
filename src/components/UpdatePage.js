@@ -75,6 +75,14 @@ const UpdatePage = () => {
         columns={columns}
         data={tableData}
         title={"demo title"}
+        options={{
+          search: false,
+          selection: true,
+          showTitle: false,
+          toolbar: false,
+      
+          paging: false,
+        }}
       />
 
       <p>Connected Account: {location.state.currentAccount}</p>
