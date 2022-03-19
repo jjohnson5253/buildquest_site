@@ -2,12 +2,12 @@
 // Update Page
 //
 
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { connect } from "@textile/tableland";
 import MaterialTable from 'material-table'
-
 import { Wallet, providers } from "ethers";
+
 
 const UpdatePage = () => {
   const [checked, setChecked] = useState();
@@ -21,10 +21,6 @@ const UpdatePage = () => {
     {title:"Id",field:"_id"},
     {title:"Owner",field:"owneraddress"},
   ]
-
-  // get location which allows us to access data passed through router.
-  // We can pass info like currentConnected wallet
-  let location = useLocation();
 
   useEffect(() => {
      // function to read tables minted on connected account
@@ -81,7 +77,6 @@ const UpdatePage = () => {
   return (
     <div>
       <h1>Update Page</h1>
-      <p>Connected Account: {location.state.currentAccount}</p>
 
       <MaterialTable
         columns={columns}
