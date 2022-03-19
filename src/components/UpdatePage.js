@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "@textile/tableland";
 import MaterialTable from 'material-table'
 import { Wallet, providers } from "ethers";
-
+import axios from 'axios';
 
 const UpdatePage = () => {
   const [checked, setChecked] = useState();
@@ -21,6 +21,24 @@ const UpdatePage = () => {
     {title:"Id",field:"_id"},
     {title:"Owner",field:"owneraddress"},
   ]
+
+  // brief    async function to get Loot Bag NFTs per given address
+  // param    [in] walletAddress: wallet to read from
+  const fetchNfts=async()=>{
+
+    // set request string to send to Moralis NFT API.
+    const walletAddress = "0x092e39E0Fc4b8e36366368E7A988Ec2cc9b00A80";
+    const nftContractAddress = "0x4d42ACeCe7F4e314Bd8C8D38C4Bc93E8F3A08a31"
+    const requestString = 'https://deep-index.moralis.io/api/v2/' + walletAddress + '/nft/' + nftContractAddress + '?chain=rinkeby&format=decimal'
+    const res = await axios.get(requestString, {
+        headers: {
+            'accept': `application/json`,
+            'x-api-key': 'KzIg5Dtp5dBhRcvGxGLJgKUoJJeWb0ceTkMykz3yOO8arvkzqkijXswbyzCA7bD0'
+        }
+    });
+
+    return res.data.result
+  }
 
   useEffect(() => {
      // function to read tables minted on connected account
@@ -69,9 +87,14 @@ const UpdatePage = () => {
   };
 
   // function to mint stuff
-  const MintStuff = () => {
+  const MintStuff = async() => {
     console.log("minting this row")
     console.log(checked)
+
+    const nfts = await fetchNfts();
+    console.log(nfts)
+    console.log(nfts[0].metadata)
+    console.log(nfts[0].metadata)
   }
 
   return (
