@@ -71,7 +71,6 @@ const UpdatePage = () => {
         myRow[name] = data
         //console.log(`  ${name}: ${data}`);
       }
-      console.log('this is myRow: ', myRow)
       newTableData.push(myRow)
     }
 
@@ -122,6 +121,12 @@ const UpdatePage = () => {
     const metadata = await getMetaDataFromGameId(gameId)
 
     console.log(metadata)
+
+    // get keys from metadata and turn those into columns.
+    // then fill in data from the values from metadata.
+    // then make values in table editable.
+    // then make this table show up once you click selection button (or make a continue button or something).
+    // then make mint button to send the metadata to Eric's endpoint
 
     setMetadataColumns(
       [
